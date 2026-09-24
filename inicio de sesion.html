@@ -88,6 +88,27 @@
       background-color: #0056b3;
     }
 
+    .alert {
+      padding: 12px;
+      border-radius: 6px;
+      font-size: 14px;
+      margin-bottom: 20px;
+      display: none;
+      text-align: center;
+    }
+
+    .alert-error {
+      background-color: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+
+    .alert-success {
+      background-color: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+
     .login-footer {
       text-align: center;
       margin-top: 20px;
@@ -114,6 +135,9 @@
       <p>Ingresa tus datos para acceder</p>
     </div>
 
+    <!-- Cajas de alerta para la respuesta del Login -->
+    <div id="alertBox" class="alert"></div>
+
     <form id="loginForm">
       <div class="form-group">
         <label for="email">Correo Electrónico</label>
@@ -125,13 +149,66 @@
         <input type="password" id="password" placeholder="••••••••" required>
       </div>
 
-      <button type="submit" class="btn-submit">Iniciar Sesión</button>
+      <button type="submit" id="btnSubmit" class="btn-submit">Iniciar Sesión</button>
     </form>
 
     <div class="login-footer">
       <p>¿No tienes una cuenta? <a href="#">Regístrate</a></p>
     </div>
   </div>
+
+  <script>
+    const loginForm = document.getElementById('loginForm');
+    const alertBox = document.getElementById('alertBox');
+    const btnSubmit = document.getElementById('btnSubmit');
+
+    loginForm.addEventListener('submit', function(event) {
+      event.preventDefault(); // Evitar recargar la página
+
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      // Ocultar alerta previa
+      alertBox.style.display = 'none';
+
+      // Validación simple
+      if (email === '' || password === '') {
+        showAlert('Por favor, completa todos los campos.', 'error');
+        return;
+      }
+
+      if (password.length < 6) {
+        showAlert('La contraseña debe tener al menos 6 caracteres.', 'error');
+        return;
+      }
+
+      // Simulación de respuesta de backend
+      btnSubmit.innerText = 'Cargando...';
+      btnSubmit.disabled = true;
+
+      setTimeout(() => {
+        // Credenciales de prueba
+        if (email === "usuario@ejemplo.com" && password === "123456") {
+          showAlert('¡Inicio de sesión exitoso! Redirigiendo...', 'success');
+          setTimeout(() => {
+            alert("¡Bienvenido a Matchwork!");
+            // Aquí puedes redirigir a la pantalla principal cuando la tengan creada:
+            // window.location.href = 'dashboard.html';
+          }, 1000);
+        } else {
+          showAlert('Correo o contraseña incorrectos.', 'error');
+          btnSubmit.innerText = 'Iniciar Sesión';
+          btnSubmit.disabled = false;
+        }
+      }, 1200);
+    });
+
+    function showAlert(message, type) {
+      alertBox.innerText = message;
+      alertBox.className = 'alert ' + (type === 'success' ? 'alert-success' : 'alert-error');
+      alertBox.style.display = 'block';
+    }
+  </script>
 
 </body>
 </html>
