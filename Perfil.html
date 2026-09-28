@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Perfil - Matchwork</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #f4f6f9;
+      color: #333;
+    }
+
+    header {
+      background-color: #ffffff;
+      border-bottom: 1px solid #e0e0e0;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    header h1 {
+      color: #007bff;
+      font-size: 22px;
+    }
+
+    nav a {
+      margin-left: 20px;
+      text-decoration: none;
+      color: #555;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    nav a:hover {
+      color: #007bff;
+    }
+
+    .btn-logout {
+      background-color: #dc3545;
+      color: white !important;
+      padding: 8px 14px;
+      border-radius: 6px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    .card {
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      margin-bottom: 25px;
+    }
+
+    .profile-header {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      margin-bottom: 20px;
+    }
+
+    .avatar-wrapper {
+      position: relative;
+      width: 110px;
+      height: 110px;
+    }
+
+    .avatar-img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #007bff;
+      background-color: #e9ecef;
+    }
+
+    .avatar-input {
+      display: none;
+    }
+
+    .btn-change-avatar {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 6px 12px;
+      background-color: #007bff;
+      color: white;
+      border-radius: 20px;
+      font-size: 12px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      font-size: 14px;
+      color: #444;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="email"],
+    .form-group textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: #007bff;
+    }
+
+    .skills-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .skill-chip {
+      background-color: #e7f1ff;
+      color: #007bff;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .skill-chip span {
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .skill-input-wrapper {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn-add-skill {
+      padding: 0 18px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .file-upload-box {
+      border: 2px dashed #007bff;
+      padding: 20px;
+      text-align: center;
+      border-radius: 8px;
+      background-color: #f8faff;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .file-upload-box:hover {
+      background-color: #eef4ff;
+    }
+
+    .file-upload-box p {
+      font-size: 13px;
+      color: #666;
+      margin-top: 5px;
+    }
+
+    .btn-save {
+      width: 100%;
+      padding: 14px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .btn-save:hover {
+      background-color: #218838;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Matchwork</h1>
+    <nav>
+      <a href="dashboard.html">Empleos</a>
+      <a href="perfil.html">Mi Perfil</a>
+      <a href="inicio de sesion.html" class="btn-logout">Cerrar Sesión</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h2>Completa tu Perfil Profesional</h2>
+    <p style="color: #666; margin-bottom: 20px; font-size: 14px;">Muestra tus habilidades y destaca ante los reclutadores.</p>
+
+    <form id="profileForm">
+      <!-- Sección Foto de Perfil y Datos Básicos -->
+      <div class="card">
+        <div class="profile-header">
+          <div style="text-align: center;">
+            <div class="avatar-wrapper">
+              <img id="avatarPreview" src="https://via.placeholder.com/110" alt="Foto de Perfil" class="avatar-img">
+            </div>
+            <label for="avatarInput" class="btn-change-avatar">Cambiar foto</label>
+            <input type="file" id="avatarInput" class="avatar-input" accept="image/*">
+          </div>
+
+          <div style="flex: 1;">
+            <div class="form-group">
+              <label for="fullName">Nombre Completo</label>
+              <input type="text" id="fullName" placeholder="Ej. Ana Martínez" required>
+            </div>
+            <div class="form-group" style="margin-bottom: 0;">
+              <label for="headline">Título Profesional o Breve Eslogan</label>
+              <input type="text" id="headline" placeholder="Ej. Desarrolladora Web Frontend | Apasionada por el UX">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="bio">Acerca de ti (Ligera Descripción)</label>
+          <textarea id="bio" rows="3" placeholder="Escribe un par de oraciones sobre tus metas, intereses o lo que buscas profesionalmente..."></textarea>
+        </div>
+      </div>
+
+      <!-- Sección Habilidades -->
+      <div class="card">
+        <h3>Habilidades clave</h3>
+        <p style="color: #666; font-size: 13px; margin-bottom: 12px;">Agrega tecnologías, idiomas o fortalezas.</p>
+        
+        <div class="skill-input-wrapper">
+          <input type="text" id="skillInput" placeholder="Ej. JavaScript, Trabajo en equipo, Inglés B2...">
+          <button type="button" class="btn-add-skill" id="btnAddSkill">Agregar</button>
+        </div>
+
+        <div class="skills-container" id="skillsContainer">
+          <!-- Habilidades de ejemplo por defecto -->
+          <div class="skill-chip">HTML/CSS <span onclick="this.parentElement.remove()">×</span></div>
+          <div class="skill-chip">Resolución de problemas <span onclick="this.parentElement.remove()">×</span></div>
+        </div>
+      </div>
+
+      <!-- Sección Subir Currículum (CV) -->
+      <div class="card">
+        <h3>Tu Curriculum Vitae (CV)</h3>
+        <p style="color: #666; font-size: 13px; margin-bottom: 15px;">Adjunta tu archivo en formato PDF.</p>
+        
+        <div class="file-upload-box" onclick="document.getElementById('cvInput').click()">
+          <strong id="cvFileName">📄 Haz clic para seleccionar tu CV (PDF)</strong>
+          <p>Tamaño máximo recomendado: 5 MB</p>
+          <input type="file" id="cvInput" accept=".pdf" style="display: none;">
+        </div>
+      </div>
+
+      <button type="submit" class="btn-save">Guardar Perfil</button>
+    </form>
+  </div>
+
+  <script>
+    // Vista previa de la foto de perfil
+    const avatarInput = document.getElementById('avatarInput');
+    const avatarPreview = document.getElementById('avatarPreview');
+
+    avatarInput.addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          avatarPreview.src = e.target.result;
+        }
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // Agregar etiquetas de habilidades dinámicamente
+    const skillInput = document.getElementById('skillInput');
+    const btnAddSkill = document.getElementById('btnAddSkill');
+    const skillsContainer = document.getElementById('skillsContainer');
+
+    btnAddSkill.addEventListener('click', addSkill);
+    skillInput.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        addSkill();
+      }
+    });
+
+    function addSkill() {
+      const value = skillInput.value.trim();
+      if (value !== '') {
+        const chip = document.createElement('div');
+        chip.className = 'skill-chip';
+        chip.innerHTML = `${value} <span onclick="this.parentElement.remove()">×</span>`;
+        skillsContainer.appendChild(chip);
+        skillInput.value = '';
+      }
+    }
+
+    // Nombre del archivo PDF cargado
+    const cvInput = document.getElementById('cvInput');
+    const cvFileName = document.getElementById('cvFileName');
+
+    cvInput.addEventListener('change', function(e) {
+      if (e.target.files.length > 0) {
+        cvFileName.innerText = '✅ CV Seleccionado: ' + e.target.files[0].name;
+      }
+    });
+
+    // Guardar cambios
+    document.getElementById('profileForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('¡Perfil guardado correctamente!');
+      window.location.href = 'dashboard.html';
+    });
+  </script>
+
+</body>
+</html>
