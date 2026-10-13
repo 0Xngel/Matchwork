@@ -53,9 +53,9 @@ Las tecnologías se incorporarán progresivamente según las necesidades del pro
 
 ```text
 Matchwork/
-├── inicio de sesion.html
-├── registro.html
-├── Perfil.html
+├── login.html
+├── register.html
+├── profile.html
 ├── README.md
 └── desktop.ini
 ```
@@ -87,7 +87,7 @@ Abre la carpeta del proyecto en Visual Studio Code.
 
 ### 3. Ejecutar la versión inicial
 
-Abre `inicio de sesion.html`, `registro.html` o `Perfil.html` en un navegador para revisar las páginas disponibles.
+Abre `login.html`, `register.html` o `profile.html` en un navegador para revisar las páginas disponibles.
 
 También puedes utilizar la extensión Live Server de VS Code para servir las páginas localmente durante el desarrollo.
 
