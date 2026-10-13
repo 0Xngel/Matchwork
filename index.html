@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f7f7fc">
+  <meta name="description" content="Descubre oportunidades laborales y encuentra tu próximo match profesional con Matchwork.">
+  <title>Matchwork — Tu próximo match profesional</title>
+
+  <script>
+    (() => {
+      const savedTheme = localStorage.getItem('matchwork-theme');
+      const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme = savedTheme === 'dark' || savedTheme === 'light'
+        ? savedTheme
+        : (systemDark ? 'dark' : 'light');
+
+      document.documentElement.dataset.theme = theme;
+    })();
+  </script>
+
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/theme.js" defer></script>
+</head>
+
+<body>
+
+  <header class="site-header">
+    
+    <nav class="navbar container" aria-label="Navegación principal">
+      <a class="brand" href="index.html" aria-label="Matchwork, página principal">
+        <span class="brand-mark" aria-hidden="true">M</span>
+        <span>matchwork<span class="brand-dot">.</span></span>
+      </a>
+
+      <div class="nav-links">
+        <a href="#como-funciona">Cómo funciona</a>
+        <a href="#oportunidades">Oportunidades</a>
+      </div>
+
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" type="button"
+          aria-label="Cambiar tema" title="Cambiar tema">
+          <span id="themeIcon" aria-hidden="true">☾</span>
+        </button>
+        <a class="button button-ghost nav-login" href="login.html">Iniciar sesión</a>
+        <a class="button button-primary nav-register" href="register.html">Crear cuenta <span aria-hidden="true">↗</span></a>
+      </div>
+
+    </nav>
+
+  </header>
+
+  <main>
+    <section class="hero container" id="como-funciona">
+      <div class="hero-copy">
+        <span class="eyebrow"><span class="status-dot"></span> Tu futuro profesional empieza aquí</span>
+
+        <h1>Tu próximo trabajo está a un <span class="highlight">match</span> de distancia.</h1>
+
+        <p class="hero-description">
+          Descubre oportunidades, conecta con empresas y encuentra un trabajo
+          que encaje contigo. Menos búsquedas interminables. Más posibilidades.
+        </p>
+
+        <div class="hero-actions">
+          <a class="button button-primary button-large" href="register.html">
+            Encuentra tu match <span aria-hidden="true">→</span>
+          </a>
+          <a class="button button-secondary button-large" href="#oportunidades">
+            Explorar oportunidades
+          </a>
+        </div>
+
+        <div class="hero-note">
+          <span class="avatar-stack" aria-hidden="true">
+            <span class="avatar avatar-purple">A</span>
+            <span class="avatar avatar-coral">M</span>
+            <span class="avatar avatar-green">J</span>
+          </span>
+          <p><strong>Tu talento tiene valor.</strong><br>Encuentra dónde hacerlo crecer.</p>
+        </div>
+
+      </div>
+
+      <div class="hero-visual" aria-label="Vista previa de oportunidades laborales">
+        <div class="visual-orbit orbit-one"></div>
+        <div class="visual-orbit orbit-two"></div>
+        <div class="floating-label floating-label-top">✦ Nuevas oportunidades</div>
+
+        <article class="job-card featured-card">
+          <div class="job-card-top">
+            <div class="company-logo company-violet">N</div>
+            <span class="job-badge">Match destacado</span>
+          </div>
+
+          <p class="company-name">NovaTech</p>
+          <h2>Frontend Developer</h2>
+          <p class="job-location">Monterrey, México · Híbrido</p>
+          <div class="job-tags">
+            <span>JavaScript</span>
+            <span>React</span>
+            <span>Junior</span>
+          </div>
+
+          <div class="job-card-footer">
+            <div><strong>$18k–$24k</strong><span>MXN / mes · Ejemplo</span></div>
+            <span class="match-score">92% match</span>
+          </div>
+
+        </article>
+
+        <article class="job-card mini-card">
+          <div class="company-logo company-green">S</div>
+          <div>
+            <strong>Diseñador UX/UI</strong>
+            <p>Studio Norte · Remoto</p>
+          </div>
+          <span class="mini-arrow" aria-hidden="true">↗</span>
+        </article>
+
+        <div class="floating-label floating-label-bottom"><span aria-hidden="true">✳</span> Tu siguiente capítulo</div>
+      </div>
+
+    </section>
+
+    <section class="trust-strip">
+
+      <div class="container trust-content">
+        <p>Una forma diferente de descubrir oportunidades</p>
+        <span>PERSONAS</span>
+        <span class="trust-separator">✦</span>
+        <span>EMPRESAS</span>
+        <span class="trust-separator">✦</span>
+        <span>OPORTUNIDADES</span>
+      </div>
+      
+    </section>
+
+    <section class="features-section container" id="oportunidades">
+      <div class="section-heading">
+        <span class="eyebrow">EL SIGUIENTE PASO</span>
+        <h2>Tu carrera merece algo <span class="highlight">mejor.</span></h2>
+        <p>Una experiencia pensada para acercarte a oportunidades que encajen con tus objetivos.</p>
+      </div>
+
+      <div class="feature-grid">
+        <article class="feature-card feature-card-purple">
+          <span class="feature-icon" aria-hidden="true">↗</span>
+          <h3>Descubre sin límites</h3>
+          <p>Explora oportunidades de forma visual y encuentra puestos que se alineen con tus habilidades.</p>
+        </article>
+
+        <article class="feature-card feature-card-green">
+          <span class="feature-icon" aria-hidden="true">◎</span>
+          <h3>Haz match con tu futuro</h3>
+          <p>Organiza tus intereses y encuentra empresas que busquen perfiles como el tuyo.</p>
+        </article>
+
+        <article class="feature-card feature-card-coral">
+          <span class="feature-icon" aria-hidden="true">✳</span>
+          <h3>Crece profesionalmente</h3>
+          <p>Construye tu perfil y presenta tu talento de una manera clara y profesional.</p>
+        </article>
+
+      </div>
+
+    </section>
+
+    <section class="final-cta container">
+
+      <div>
+        <span class="eyebrow">ES TU MOMENTO</span>
+        <h2>El siguiente paso empieza contigo.</h2>
+        <p>Crea tu perfil y comienza a explorar nuevas posibilidades.</p>
+      </div>
+
+      <a class="button button-dark" href="register.html">Comenzar ahora <span aria-hidden="true">→</span></a>
+
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+
+    <div class="container footer-content">
+      <a class="brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true">M</span>
+        <span>matchwork<span class="brand-dot">.</span></span>
+      </a>
+      <p>Un proyecto académico en construcción · Desarrollo Web Profesional</p>
+    </div>
+
+  </footer>
+
+</body>
+
+</html>
