@@ -174,11 +174,40 @@
     </form>
 
     <div class="register-footer">
-      <p>¿Ya tienes una cuenta? <a href="inicio de sesion.html">Inicia Sesión</a></p>
+      <p>¿Ya tienes una cuenta? <a href="login.html">Inicia Sesión</a></p>
     </div>
   </div>
 
-  <script>
+  <script type="module">
+
+import { animate, stagger } from 'https://cdn.jsdelivr.net/npm/animejs@4.0.2/+esm';
+
+// Animación de entrada del formulario
+animate('.register-container', {
+  opacity: [0, 1],
+  translateY: [24, 0],
+  duration: 700,
+  ease: 'outQuad'
+});
+
+// Entrada progresiva de los campos
+animate('.form-group', {
+  opacity: [0, 1],
+  translateY: [12, 0],
+  delay: stagger(80, { start: 200 }),
+  duration: 500,
+  ease: 'outQuad'
+});
+
+// Entrada del botón de registro
+animate('.btn-submit', {
+  opacity: [0, 1],
+  translateY: [10, 0],
+  delay: 650,
+  duration: 450,
+  ease: 'outQuad'
+});
+
     const registerForm = document.getElementById('registerForm');
     const alertBox = document.getElementById('alertBox');
     const btnSubmit = document.getElementById('btnSubmit');
@@ -218,7 +247,7 @@
         showAlert('¡Cuenta creada con éxito! Redirigiendo al inicio de sesión...', 'success');
         
         setTimeout(() => {
-          window.location.href = 'inicio de sesion.html';
+          window.location.href = 'login.html';
         }, 1500);
       }, 1000);
     });
