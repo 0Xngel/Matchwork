@@ -1,0 +1,325 @@
+/* MATCHWORK — PERFIL PROFESIONAL */
+
+.profile-main {
+  width: min(100%, 850px);
+  margin-inline: auto;
+  padding-block: 42px 64px;
+}
+
+.profile-intro {
+  margin-bottom: 28px;
+}
+
+.profile-intro h1 {
+  margin-bottom: 10px;
+  font-size: clamp(28px, 5vw, 36px);
+  letter-spacing: -1.3px;
+}
+
+.profile-intro p {
+  color: var(--color-text-secondary);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.profile-card {
+  margin-bottom: 22px;
+  padding: clamp(22px, 4vw, 32px);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+}
+
+.profile-section-heading {
+  margin-bottom: 22px;
+}
+
+.profile-section-heading h2 {
+  margin-bottom: 7px;
+  font-size: 19px;
+  letter-spacing: -0.4px;
+}
+
+.profile-section-heading p {
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.profile-identity {
+  display: grid;
+  grid-template-columns: 130px minmax(0, 1fr);
+  gap: 25px;
+  align-items: start;
+}
+
+.profile-avatar-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.profile-avatar {
+  width: 112px;
+  height: 112px;
+  border: 3px solid var(--color-primary);
+  border-radius: 50%;
+  background: var(--color-background);
+  object-fit: cover;
+}
+
+.profile-file-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.profile-file-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 13px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.profile-file-label:hover {
+  border-color: var(--color-primary);
+}
+
+.profile-file-input:focus-visible + .profile-file-label {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
+.profile-card .form-group {
+  margin-bottom: 19px;
+}
+
+.profile-card .form-group:last-child {
+  margin-bottom: 0;
+}
+
+.profile-card .form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.profile-card .form-group input,
+.profile-card .form-group textarea {
+  display: block;
+  width: 100%;
+  min-height: 46px;
+  padding: 12px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  outline: none;
+  background: var(--color-background);
+  color: var(--color-text);
+  font: inherit;
+  font-size: 14px;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.profile-card .form-group textarea {
+  min-height: 105px;
+  resize: vertical;
+  line-height: 1.7;
+}
+
+.profile-card .form-group input:focus,
+.profile-card .form-group textarea:focus,
+.skill-input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgb(118 87 255 / 15%);
+}
+
+.profile-card input::placeholder,
+.profile-card textarea::placeholder,
+.skill-input::placeholder {
+  color: var(--color-text-secondary);
+  opacity: 0.8;
+}
+
+.skill-input-wrapper {
+  display: flex;
+  gap: 10px;
+}
+
+.skill-input {
+  flex: 1;
+  min-width: 0;
+  min-height: 46px;
+  padding: 12px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  outline: none;
+  background: var(--color-background);
+  color: var(--color-text);
+  font: inherit;
+  font-size: 14px;
+}
+
+.btn-add-skill {
+  flex-shrink: 0;
+}
+
+.skills-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 18px;
+}
+
+.skill-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 12px;
+  border: 1px solid rgb(118 87 255 / 22%);
+  border-radius: 999px;
+  background: rgb(118 87 255 / 10%);
+  color: var(--color-text);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.skill-remove {
+  display: inline-grid;
+  width: 20px;
+  height: 20px;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--color-text-secondary);
+  font-size: 17px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.skill-remove:hover {
+  background: rgb(118 87 255 / 16%);
+  color: var(--color-primary);
+}
+
+.profile-upload-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 28px 18px;
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-background);
+  text-align: center;
+  transition: border-color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.profile-upload-box:hover,
+.profile-upload-box:focus-within {
+  border-color: var(--color-primary);
+}
+
+.profile-upload-icon {
+  font-size: 28px;
+}
+
+.profile-upload-box strong {
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+.profile-upload-box p {
+  color: var(--color-text-secondary);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.profile-feedback {
+  margin-bottom: 18px;
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.profile-feedback[hidden] {
+  display: none;
+}
+
+.profile-feedback.error {
+  border: 1px solid #f2b8bd;
+  background: #fff0f1;
+  color: #8f2430;
+}
+
+.profile-feedback.success {
+  border: 1px solid #a9e8d8;
+  background: #e9fbf5;
+  color: #12664f;
+}
+
+:root[data-theme="dark"] .profile-feedback.error {
+  border-color: #713942;
+  background: #3b2029;
+  color: #ffc4cb;
+}
+
+:root[data-theme="dark"] .profile-feedback.success {
+  border-color: #246653;
+  background: #17382f;
+  color: #aaf0d8;
+}
+
+.profile-save {
+  width: 100%;
+  min-height: 50px;
+}
+
+.profile-save:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+@media (max-width: 600px) {
+  .profile-main {
+    padding-block: 28px 42px;
+  }
+
+  .profile-identity {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-avatar-column {
+    margin-bottom: 8px;
+  }
+
+  .skill-input-wrapper {
+    flex-direction: column;
+  }
+
+  .skill-input-wrapper .button {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .profile-card,
+  .profile-card * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
