@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f7f7fc">
+  <meta name="description" content="Detalle de la vacante en Matchwork.">
+  <title>Vacante — Matchwork</title>
+
+  <script>
+    (() => {
+      try {
+        const saved = localStorage.getItem('matchwork-theme');
+        const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        document.documentElement.dataset.theme =
+          saved === 'light' || saved === 'dark'
+            ? saved
+            : systemDark ? 'dark' : 'light';
+      } catch {
+        document.documentElement.dataset.theme =
+          window.matchMedia('(prefers-color-scheme: dark)').matches
+            ? 'dark'
+            : 'light';
+      }
+    })();
+  </script>
+
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/vacante.css">
+  <script src="js/theme.js" defer></script>
+  <script src="js/store.js" defer></script>
+  <script src="js/vacante.js" defer></script>
+</head>
+
+<body>
+  <header class="site-header">
+    <nav class="navbar container" aria-label="Navegación principal">
+      <a class="brand" href="index.html" aria-label="Matchwork, página principal">
+        <span class="brand-mark" aria-hidden="true">M</span>
+        <span>matchwork<span class="brand-dot">.</span></span>
+      </a>
+
+      <div class="nav-links">
+        <a href="index.html#como-funciona">Cómo funciona</a>
+        <a href="empleos.html">Empleos</a>
+      </div>
+
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" type="button"
+          aria-label="Cambiar tema" title="Cambiar tema">
+          <span id="themeIcon" aria-hidden="true">☾</span>
+        </button>
+        <a class="button button-ghost nav-login" href="login.html">Iniciar sesión</a>
+        <a class="button button-primary nav-register" href="register.html">Crear cuenta <span aria-hidden="true">↗</span></a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="vac-main container">
+    <a class="vac-back" href="empleos.html">← Volver a empleos</a>
+
+    <article class="vac-card" id="vacancy" hidden>
+      <div class="vac-top">
+        <div class="company-logo" id="vacLogo"></div>
+        <div>
+          <p class="company-name" id="vacCompany"></p>
+          <h1 id="vacTitle"></h1>
+          <p class="job-location" id="vacMeta"></p>
+        </div>
+      </div>
+
+      <div class="job-tags" id="vacTags"></div>
+
+      <dl class="vac-facts">
+        <div>
+          <dt>Sueldo mensual</dt>
+          <dd id="vacSalary"></dd>
+        </div>
+        <div>
+          <dt>Publicada por</dt>
+          <dd id="vacOwner"></dd>
+        </div>
+        <div>
+          <dt>Publicada</dt>
+          <dd id="vacPosted"></dd>
+        </div>
+        <div id="vacMatchBox" hidden>
+          <dt>Match con tu perfil</dt>
+          <dd id="vacMatch"></dd>
+        </div>
+      </dl>
+
+      <h2>Descripción</h2>
+      <p class="vac-description" id="vacDescription"></p>
+
+      <div class="vac-actions">
+        <button class="button button-primary button-large" id="btnApply" type="button">Postularme</button>
+        <p class="vac-message" id="applyMessage" role="status" aria-live="polite"></p>
+      </div>
+    </article>
+
+    <div class="vac-missing" id="vacMissing" hidden>
+      <h1>No encontramos esta vacante</h1>
+      <p>Puede que ya no exista o que el enlace esté incompleto.</p>
+      <a class="button button-secondary" href="empleos.html">Ver todas las vacantes</a>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <a class="brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true">M</span>
+        <span>matchwork<span class="brand-dot">.</span></span>
+      </a>
+      <p>Un proyecto académico en construcción · Desarrollo Web Profesional</p>
+    </div>
+  </footer>
+</body>
+</html>

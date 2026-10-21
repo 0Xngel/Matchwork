@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f7f7fc">
+  <meta name="description" content="Tu panel en Matchwork: postulaciones, vacantes y estadísticas.">
+  <title>Mi panel — Matchwork</title>
+
+  <script>
+    (() => {
+      try {
+        const saved = localStorage.getItem('matchwork-theme');
+        const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        document.documentElement.dataset.theme =
+          saved === 'light' || saved === 'dark'
+            ? saved
+            : systemDark ? 'dark' : 'light';
+      } catch {
+        document.documentElement.dataset.theme =
+          window.matchMedia('(prefers-color-scheme: dark)').matches
+            ? 'dark'
+            : 'light';
+      }
+    })();
+  </script>
+
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <script src="js/theme.js" defer></script>
+  <script src="js/store.js" defer></script>
+  <script src="js/dashboard.js" defer></script>
+</head>
+
+<body>
+  <header class="site-header">
+    <nav class="navbar container" aria-label="Navegación principal">
+      <a class="brand" href="index.html" aria-label="Matchwork, página principal">
+        <span class="brand-mark" aria-hidden="true">M</span>
+        <span>matchwork<span class="brand-dot">.</span></span>
+      </a>
+
+      <div class="nav-actions">
+        <a class="button button-secondary" href="dashboard.html" aria-current="page">Empleos</a>
+        <a class="button button-ghost" href="profile.html">Mi perfil</a>
+
+        <button class="theme-toggle" id="themeToggle" type="button"
+          aria-label="Cambiar tema" title="Cambiar tema">
+          <span id="themeIcon" aria-hidden="true">☾</span>
+        </button>
+
+        <a class="button button-ghost" href="index.html">Cerrar sesión</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="dash-main container">
+
+    <div class="dash-header">
+      <div>
+        <h1>Hola, <span class="highlight" id="userName"></span></h1>
+        <p id="dashSubtitle">Esto es lo que pasa con tu búsqueda.</p>
+      </div>
+
+      <div class="mode-switch" role="group" aria-label="¿Qué quieres hacer?">
+        <button class="mode-option" type="button" data-mode="seeker" aria-pressed="true">Busco trabajo</button>
+        <button class="mode-option" type="button" data-mode="employer" aria-pressed="false">Ofrezco trabajo</button>
+      </div>
+    </div>
+
+    <!-- ===== MODO: BUSCO TRABAJO ===== -->
+    <div class="dash-panel" id="panelSeeker">
+
+      <form class="dash-search" action="empleos.html" method="get" role="search">
+        <label class="visually-hidden" for="dashSearch">Buscar vacantes</label>
+        <span class="search-icon" aria-hidden="true">⌕</span>
+        <input id="dashSearch" name="q" type="search" autocomplete="off"
+          placeholder="Busca por puesto, empresa, habilidad o ciudad">
+        <button class="button button-primary" type="submit">Buscar</button>
+      </form>
+
+      <div class="stats-grid" id="seekerStats"></div>
+
+      <div class="dash-columns">
+        <section class="panel" aria-labelledby="titleApplications">
+          <div class="panel-heading">
+            <h2 id="titleApplications">Mis postulaciones</h2>
+          </div>
+          <ul class="item-list" id="applicationsList"></ul>
+        </section>
+
+        <section class="panel" aria-labelledby="titleRecommended">
+          <div class="panel-heading">
+            <h2 id="titleRecommended">Vacantes para ti</h2>
+            <a class="panel-link" href="empleos.html">Ver todas</a>
+          </div>
+          <ul class="item-list" id="recommendedList"></ul>
+        </section>
+      </div>
+    </div>
+
+    <!-- ===== MODO: OFREZCO TRABAJO ===== -->
+    <div class="dash-panel" id="panelEmployer" hidden>
+
+      <div class="employer-cta">
+        <div>
+          <h2>¿Buscas talento?</h2>
+          <p>Publica una vacante y empieza a recibir postulaciones.</p>
+        </div>
+        <a class="button button-primary" href="publicar.html">Publicar vacante <span aria-hidden="true">+</span></a>
+      </div>
+
+      <div class="stats-grid" id="employerStats"></div>
+
+      <div class="dash-columns">
+        <section class="panel" aria-labelledby="titleMyJobs">
+          <div class="panel-heading">
+            <h2 id="titleMyJobs">Mis vacantes</h2>
+          </div>
+          <ul class="item-list" id="myJobsList"></ul>
+        </section>
+
+        <section class="panel" aria-labelledby="titleCandidates">
+          <div class="panel-heading">
+            <h2 id="titleCandidates">Candidatos recientes</h2>
+          </div>
+          <ul class="item-list" id="candidatesList"></ul>
+        </section>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <a class="brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true">M</span>
+        <span>matchwork<span class="brand-dot">.</span></span>
+      </a>
+      <p>Un proyecto académico en construcción · Desarrollo Web Profesional</p>
+    </div>
+  </footer>
+</body>
+</html>

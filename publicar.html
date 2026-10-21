@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f7f7fc">
+  <meta name="description" content="Publica una vacante en Matchwork y encuentra al talento que buscas.">
+  <title>Publicar vacante — Matchwork</title>
+
+  <script>
+    (() => {
+      try {
+        const saved = localStorage.getItem('matchwork-theme');
+        const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        document.documentElement.dataset.theme =
+          saved === 'light' || saved === 'dark'
+            ? saved
+            : systemDark ? 'dark' : 'light';
+      } catch {
+        document.documentElement.dataset.theme =
+          window.matchMedia('(prefers-color-scheme: dark)').matches
+            ? 'dark'
+            : 'light';
+      }
+    })();
+  </script>
+
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/publicar.css">
+  <script src="js/theme.js" defer></script>
+  <script src="js/store.js" defer></script>
+  <script src="js/publicar.js" defer></script>
+</head>
+
+<body>
+  <header class="site-header">
+    <nav class="navbar container" aria-label="Navegación principal">
+      <a class="brand" href="index.html" aria-label="Matchwork, página principal">
+        <span class="brand-mark" aria-hidden="true">M</span>
+        <span>matchwork<span class="brand-dot">.</span></span>
+      </a>
+
+      <div class="nav-actions">
+        <a class="button button-secondary" href="dashboard.html">Empleos</a>
+        <a class="button button-ghost" href="profile.html">Mi perfil</a>
+
+        <button class="theme-toggle" id="themeToggle" type="button"
+          aria-label="Cambiar tema" title="Cambiar tema">
+          <span id="themeIcon" aria-hidden="true">☾</span>
+        </button>
+
+        <a class="button button-ghost" href="index.html">Cerrar sesión</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="pub-main container">
+    <div class="pub-intro">
+      <a class="pub-back" href="dashboard.html">← Volver al panel</a>
+      <h1>Publica una <span class="highlight">vacante.</span></h1>
+      <p>Cuéntanos qué puesto buscas cubrir. A la derecha ves cómo lo verán los candidatos.</p>
+    </div>
+
+    <div class="pub-layout">
+
+      <form id="jobForm" novalidate>
+        <div id="formFeedback" class="pub-feedback" role="status" aria-live="polite" hidden></div>
+
+        <section class="pub-card">
+          <h2>Datos del puesto</h2>
+
+          <div class="pub-field">
+            <label for="title">Nombre del puesto</label>
+            <input id="title" name="title" type="text" maxlength="80"
+              placeholder="Ej. Frontend Developer" autocomplete="off" required>
+            <p class="field-error" id="err-title"></p>
+          </div>
+
+          <div class="pub-field">
+            <label for="company">Empresa</label>
+            <input id="company" name="company" type="text" maxlength="60"
+              placeholder="Ej. NovaTech" autocomplete="organization" required>
+            <p class="field-error" id="err-company"></p>
+          </div>
+
+          <div class="pub-field">
+            <label for="location">Ubicación</label>
+            <input id="location" name="location" type="text" maxlength="80"
+              placeholder="Ej. Monterrey, México" autocomplete="off" required>
+            <p class="field-error" id="err-location"></p>
+          </div>
+
+          <div class="pub-row">
+            <div class="pub-field">
+              <label for="mode">Modalidad</label>
+              <select id="mode" name="mode" required>
+                <option value="">Elige una opción</option>
+                <option value="Remoto">Remoto</option>
+                <option value="Híbrido">Híbrido</option>
+                <option value="Presencial">Presencial</option>
+              </select>
+              <p class="field-error" id="err-mode"></p>
+            </div>
+
+            <div class="pub-field">
+              <label for="level">Nivel</label>
+              <select id="level" name="level" required>
+                <option value="">Elige una opción</option>
+                <option value="Practicante">Practicante</option>
+                <option value="Junior">Junior</option>
+                <option value="Semi Senior">Semi Senior</option>
+                <option value="Senior">Senior</option>
+              </select>
+              <p class="field-error" id="err-level"></p>
+            </div>
+          </div>
+        </section>
+
+        <section class="pub-card">
+          <h2>Sueldo mensual</h2>
+          <p class="pub-hint">Opcional. En pesos mexicanos. Si lo dejas vacío, se mostrará "A tratar".</p>
+
+          <div class="pub-row">
+            <div class="pub-field">
+              <label for="salaryMin">Mínimo</label>
+              <input id="salaryMin" name="salaryMin" type="number" min="0" step="500"
+                inputmode="numeric" placeholder="18000">
+            </div>
+
+            <div class="pub-field">
+              <label for="salaryMax">Máximo</label>
+              <input id="salaryMax" name="salaryMax" type="number" min="0" step="500"
+                inputmode="numeric" placeholder="24000">
+              <p class="field-error" id="err-salaryMax"></p>
+            </div>
+          </div>
+        </section>
+
+        <section class="pub-card">
+          <h2>Descripción</h2>
+          <p class="pub-hint">Explica las funciones del puesto y lo que ofrece la empresa.</p>
+
+          <div class="pub-field">
+            <label for="description">Descripción de la vacante</label>
+            <textarea id="description" name="description" rows="6" maxlength="1500"
+              placeholder="Ej. Buscamos a una persona para desarrollar interfaces con React..."></textarea>
+            <p class="pub-counter" id="descriptionCounter">0 / 1500</p>
+            <p class="field-error" id="err-description"></p>
+          </div>
+        </section>
+
+        <section class="pub-card">
+          <h2>Habilidades requeridas</h2>
+          <p class="pub-hint">Hasta 8. Los candidatos las usan para buscar y hacer match.</p>
+
+          <div class="pub-skill-input">
+            <label class="visually-hidden" for="skillInput">Nueva habilidad</label>
+            <input id="skillInput" type="text" maxlength="40"
+              placeholder="Ej. React, SQL, inglés B2..." autocomplete="off">
+            <button class="button button-secondary" id="btnAddSkill" type="button">Agregar</button>
+          </div>
+
+          <div class="pub-chips" id="skillsList" aria-label="Habilidades añadidas"></div>
+          <p class="field-error" id="err-skills"></p>
+        </section>
+
+        <button class="button button-primary pub-submit" id="btnPublish" type="submit">
+          Publicar vacante <span aria-hidden="true">→</span>
+        </button>
+      </form>
+
+      <aside class="pub-preview" aria-label="Vista previa de la vacante">
+        <h2>Vista previa</h2>
+
+        <article class="job-card">
+          <div class="job-card-top">
+            <div class="company-logo company-violet" id="previewLogo">M</div>
+            <span class="job-badge">Nueva</span>
+          </div>
+
+          <p class="company-name" id="previewCompany">Tu empresa</p>
+          <h3 id="previewTitle">Nombre del puesto</h3>
+          <p class="job-location" id="previewLocation">Ubicación · Modalidad</p>
+
+          <div class="job-tags" id="previewTags"></div>
+
+          <div class="job-card-footer">
+            <div>
+              <strong id="previewSalary">A tratar</strong>
+              <span>MXN / mes</span>
+            </div>
+          </div>
+        </article>
+      </aside>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <a class="brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true">M</span>
+        <span>matchwork<span class="brand-dot">.</span></span>
+      </a>
+      <p>Un proyecto académico en construcción · Desarrollo Web Profesional</p>
+    </div>
+  </footer>
+</body>
+</html>

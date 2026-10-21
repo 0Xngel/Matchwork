@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f7f7fc">
+  <meta name="description" content="Completa tu perfil profesional en Matchwork y destaca tus habilidades.">
+  <title>Mi perfil — Matchwork</title>
+
+  <script>
+    (() => {
+      try {
+        const saved = localStorage.getItem('matchwork-theme');
+        const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        document.documentElement.dataset.theme =
+          saved === 'light' || saved === 'dark'
+            ? saved
+            : systemDark ? 'dark' : 'light';
+      } catch {
+        document.documentElement.dataset.theme =
+          window.matchMedia('(prefers-color-scheme: dark)').matches
+            ? 'dark'
+            : 'light';
+      }
+    })();
+  </script>
+
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/profile.css">
+  <script src="js/theme.js" defer></script>
+</head>
+
+<body>
+  <header class="site-header">
+    <nav class="navbar container" aria-label="Navegación principal">
+      <a class="brand" href="index.html" aria-label="Matchwork, página principal">
+        <span class="brand-mark" aria-hidden="true">M</span>
+        <span>matchwork<span class="brand-dot">.</span></span>
+      </a>
+
+      <div class="nav-actions">
+        <a class="button button-ghost" href="dashboard.html">Empleos</a>
+        <a class="button button-secondary" href="profile.html" aria-current="page">Mi perfil</a>
+
+        <button class="theme-toggle" id="themeToggle" type="button"
+          aria-label="Cambiar tema" title="Cambiar tema">
+          <span id="themeIcon" aria-hidden="true">☾</span>
+        </button>
+
+        <a class="button button-ghost" href="index.html">Cerrar sesión</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="profile-main container">
+    <div class="profile-intro">
+      <span class="eyebrow">TU IDENTIDAD PROFESIONAL</span>
+      <h1>Construye tu <span class="highlight">perfil.</span></h1>
+      <p>Comparte tus habilidades, presenta tu experiencia y muestra a los reclutadores lo que puedes aportar.</p>
+    </div>
+
+    <form id="profileForm" novalidate>
+      <div id="profileFeedback" class="profile-feedback" role="status"
+        aria-live="polite" hidden></div>
+
+      <section class="profile-card">
+        <div class="profile-section-heading">
+          <h2>Información personal</h2>
+          <p>Comencemos por lo esencial: quién eres y qué te define profesionalmente.</p>
+        </div>
+
+        <div class="profile-identity">
+          <div class="profile-avatar-column">
+            <img
+              id="avatarPreview"
+              src="https://placehold.co/220x220/f0edff/7657ff?text=M"
+              alt="Vista previa de tu foto de perfil"
+              class="profile-avatar"
+            >
+
+            <input
+              type="file"
+              id="avatarInput"
+              class="profile-file-input"
+              accept="image/jpeg,image/png,image/webp"
+              aria-describedby="avatarHelp"
+            >
+            <label for="avatarInput" class="profile-file-label">Cambiar foto</label>
+            <p id="avatarHelp" class="auth-demo-note">JPG, PNG o WebP. Máximo 5 MB.</p>
+          </div>
+
+          <div>
+            <div class="form-group">
+              <label for="fullName">Nombre completo</label>
+              <input
+                type="text"
+                id="fullName"
+                name="fullName"
+                placeholder="Ej. Ana Martínez"
+                autocomplete="name"
+                required
+              >
+            </div>
+
+            <div class="form-group">
+              <label for="headline">Título profesional</label>
+              <input
+                type="text"
+                id="headline"
+                name="headline"
+                placeholder="Ej. Desarrolladora web frontend"
+                maxlength="120"
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-top: 22px;">
+          <label for="bio">Acerca de ti</label>
+          <textarea
+            id="bio"
+            name="bio"
+            rows="4"
+            maxlength="1000"
+            placeholder="Cuéntanos tus intereses, fortalezas y metas profesionales..."
+          ></textarea>
+        </div>
+      </section>
+
+      <section class="profile-card">
+        <div class="profile-section-heading">
+          <h2>Habilidades clave</h2>
+          <p>Añade tecnologías, idiomas o fortalezas que quieras destacar.</p>
+        </div>
+
+        <div class="skill-input-wrapper">
+          <input
+            type="text"
+            id="skillInput"
+            class="skill-input"
+            placeholder="Ej. JavaScript, inglés B2..."
+            maxlength="50"
+            aria-label="Nueva habilidad"
+          >
+          <button type="button" class="button button-primary btn-add-skill"
+            id="btnAddSkill">Agregar</button>
+        </div>
+
+        <div class="skills-container" id="skillsContainer" aria-label="Habilidades añadidas">
+          <span class="skill-chip">
+            HTML/CSS
+            <button type="button" class="skill-remove" aria-label="Eliminar HTML/CSS">×</button>
+          </span>
+          <span class="skill-chip">
+            Resolución de problemas
+            <button type="button" class="skill-remove" aria-label="Eliminar Resolución de problemas">×</button>
+          </span>
+        </div>
+      </section>
+
+      <section class="profile-card">
+        <div class="profile-section-heading">
+          <h2>Currículum vitae</h2>
+          <p>Selecciona tu CV en PDF para tenerlo preparado en tu perfil.</p>
+        </div>
+
+        <div class="profile-upload-box">
+          <span class="profile-upload-icon" aria-hidden="true">↥</span>
+          <strong id="cvFileName">Selecciona tu currículum en PDF</strong>
+          <p id="cvHelp">Archivo PDF de hasta 5 MB. En esta versión no se sube a un servidor.</p>
+
+          <input
+            type="file"
+            id="cvInput"
+            class="profile-file-input"
+            accept="application/pdf,.pdf"
+            aria-describedby="cvHelp"
+          >
+          <label for="cvInput" class="profile-file-label">Elegir archivo</label>
+        </div>
+      </section>
+
+      <button type="submit" id="btnSaveProfile" class="button button-primary profile-save">
+        Guardar perfil <span aria-hidden="true">→</span>
+      </button>
+    </form>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <a class="brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true">M</span>
+        <span>matchwork<span class="brand-dot">.</span></span>
+      </a>
+      <p>Un proyecto académico en construcción · Desarrollo Web Profesional</p>
+    </div>
+  </footer>
+
+  <script>
+    const avatarInput = document.getElementById('avatarInput');
+    const avatarPreview = document.getElementById('avatarPreview');
+    const skillInput = document.getElementById('skillInput');
+    const btnAddSkill = document.getElementById('btnAddSkill');
+    const skillsContainer = document.getElementById('skillsContainer');
+    const cvInput = document.getElementById('cvInput');
+    const cvFileName = document.getElementById('cvFileName');
+    const profileForm = document.getElementById('profileForm');
+    const profileFeedback = document.getElementById('profileFeedback');
+    const btnSaveProfile = document.getElementById('btnSaveProfile');
+
+    const MAX_FILE_SIZE = 5 * 1024 * 1024;
+    let avatarObjectUrl = null;
+
+    avatarInput.addEventListener('change', () => {
+      const file = avatarInput.files[0];
+      if (!file) return;
+
+      const allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
+
+      if (!allowedTypes.includes(file.type)) {
+        showFeedback('Selecciona una imagen JPG, PNG o WebP.', 'error');
+        avatarInput.value = '';
+        return;
+      }
+
+      if (file.size > MAX_FILE_SIZE) {
+        showFeedback('La imagen no puede superar los 5 MB.', 'error');
+        avatarInput.value = '';
+        return;
+      }
+
+      if (avatarObjectUrl) URL.revokeObjectURL(avatarObjectUrl);
+
+      avatarObjectUrl = URL.createObjectURL(file);
+      avatarPreview.src = avatarObjectUrl;
+      showFeedback('Vista previa de la foto actualizada.', 'success');
+    });
+
+    btnAddSkill.addEventListener('click', addSkill);
+
+    skillInput.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        addSkill();
+      }
+    });
+
+    skillsContainer.addEventListener('click', (event) => {
+      const removeButton = event.target.closest('.skill-remove');
+      if (removeButton) {
+        removeButton.closest('.skill-chip').remove();
+      }
+    });
+
+    function addSkill() {
+      const value = skillInput.value.trim();
+
+      if (!value) return;
+
+      const existingSkills = [...skillsContainer.querySelectorAll('.skill-chip')]
+        .map(chip => chip.firstChild.textContent.trim().toLocaleLowerCase());
+
+      if (existingSkills.includes(value.toLocaleLowerCase())) {
+        showFeedback('Esa habilidad ya está en tu lista.', 'error');
+        return;
+      }
+
+      const chip = document.createElement('span');
+      chip.className = 'skill-chip';
+
+      const skillName = document.createTextNode(value);
+      const removeButton = document.createElement('button');
+
+      removeButton.type = 'button';
+      removeButton.className = 'skill-remove';
+      removeButton.textContent = '×';
+      removeButton.setAttribute('aria-label', `Eliminar ${value}`);
+
+      chip.append(skillName, removeButton);
+      skillsContainer.appendChild(chip);
+
+      skillInput.value = '';
+      skillInput.focus();
+      showFeedback('Habilidad añadida a la vista del perfil.', 'success');
+    }
+
+    cvInput.addEventListener('change', () => {
+      const file = cvInput.files[0];
+      if (!file) return;
+
+      const isPdf = file.type === 'application/pdf' ||
+        file.name.toLowerCase().endsWith('.pdf');
+
+      if (!isPdf) {
+        showFeedback('El currículum debe estar en formato PDF.', 'error');
+        cvInput.value = '';
+        cvFileName.textContent = 'Selecciona tu currículum en PDF';
+        return;
+      }
+
+      if (file.size > MAX_FILE_SIZE) {
+        showFeedback('El currículum no puede superar los 5 MB.', 'error');
+        cvInput.value = '';
+        cvFileName.textContent = 'Selecciona tu currículum en PDF';
+        return;
+      }
+
+      cvFileName.textContent = `PDF seleccionado: ${file.name}`;
+      showFeedback('Archivo seleccionado. Todavía no se ha subido a un servidor.', 'success');
+    });
+
+    profileForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const fullName = document.getElementById('fullName').value.trim();
+
+      if (!fullName) {
+        showFeedback('Escribe tu nombre completo antes de continuar.', 'error');
+        document.getElementById('fullName').focus();
+        return;
+      }
+
+      btnSaveProfile.disabled = true;
+      btnSaveProfile.textContent = 'Procesando...';
+
+      window.setTimeout(() => {
+        showFeedback(
+          '¡Perfil validado! Este prototipo todavía no guarda los cambios de forma permanente.',
+          'success'
+        );
+
+        btnSaveProfile.disabled = false;
+        btnSaveProfile.innerHTML = 'Guardar perfil <span aria-hidden="true">→</span>';
+      }, 500);
+    });
+
+    function showFeedback(message, type) {
+      profileFeedback.textContent = message;
+      profileFeedback.className = `profile-feedback ${type}`;
+      profileFeedback.hidden = false;
+    }
+
+    const profileCard = document.querySelector('.profile-intro');
+
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      import('https://cdn.jsdelivr.net/npm/animejs@4.0.2/+esm')
+        .then(({ animate, stagger }) => {
+          animate(profileCard, {
+            opacity: [0, 1],
+            translateY: [14, 0],
+            duration: 450,
+            ease: 'outQuad'
+          });
+
+          animate('.profile-card', {
+            opacity: [0, 1],
+            translateY: [14, 0],
+            delay: stagger(100, { start: 100 }),
+            duration: 450,
+            ease: 'outQuad'
+          });
+        })
+        .catch(() => {
+          // La página sigue funcionando aunque la animación no esté disponible.
+        });
+    }
+  </script>
+</body>
+</html>

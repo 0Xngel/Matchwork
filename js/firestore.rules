@@ -1,0 +1,34 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Cada usuario solo lee y edita su propio perfil.
+    match /users/{uid} {
+      allow read, write: if request.auth != null && request.auth.uid == uid;
+    }
+
+    // Las vacantes las puede ver cualquiera; solo su dueño las crea, edita o borra.
+    match /jobs/{jobId} {
+      allow read: if true;
+      allow create: if request.auth != null
+        && request.resource.data.ownerId == request.auth.uid;
+      allow update, delete: if request.auth != null
+        && resource.data.ownerId == request.auth.uid;
+    }
+
+    // Una postulación la ven quien se postuló y el dueño de la vacante.
+    match /applications/{applicationId} {
+      allow read: if request.auth != null
+        && resource.data.applicantId == request.auth.uid;
+      allow read: if request.auth != null
+        && resource.data.jobOwnerId == request.auth.uid;
+      allow create: if request.auth != null
+        && request.resource.data.applicantId == request.auth.uid
+        && request.resource.data.applicantId != request.resource.data.jobOwnerId
+        && request.resource.data.status == 'En revisión'
+        && applicationId == request.resource.data.jobId + '_' + request.auth.uid
+        && get(/databases/$(database)/documents/jobs/$(request.resource.data.jobId)).data.ownerId
+           == request.resource.data.jobOwnerId;
+    }
+  }
+}

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f7f7fc">
+  <meta name="description" content="Busca vacantes por puesto, empresa, habilidad o ciudad en Matchwork.">
+  <title>Empleos — Matchwork</title>
+
+  <script>
+    (() => {
+      const savedTheme = localStorage.getItem('matchwork-theme');
+      const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme = savedTheme === 'dark' || savedTheme === 'light'
+        ? savedTheme
+        : (systemDark ? 'dark' : 'light');
+
+      document.documentElement.dataset.theme = theme;
+    })();
+  </script>
+
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/empleos.css">
+  <script src="js/theme.js" defer></script>
+  <script src="js/store.js" defer></script>
+  <script src="js/empleos.js" defer></script>
+</head>
+
+<body>
+
+  <header class="site-header">
+    <nav class="navbar container" aria-label="Navegación principal">
+      <a class="brand" href="index.html" aria-label="Matchwork, página principal">
+        <span class="brand-mark" aria-hidden="true">M</span>
+        <span>matchwork<span class="brand-dot">.</span></span>
+      </a>
+
+      <div class="nav-links">
+        <a href="index.html#como-funciona">Cómo funciona</a>
+        <a href="empleos.html" aria-current="page">Empleos</a>
+      </div>
+
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" type="button"
+          aria-label="Cambiar tema" title="Cambiar tema">
+          <span id="themeIcon" aria-hidden="true">☾</span>
+        </button>
+        <a class="button button-ghost nav-login" href="login.html">Iniciar sesión</a>
+        <a class="button button-primary nav-register" href="register.html">Crear cuenta <span aria-hidden="true">↗</span></a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="jobs-hero container">
+      <h1>Busca tu próximo <span class="highlight">empleo</span></h1>
+      <p>Escribe un puesto, una empresa, una habilidad o una ciudad.</p>
+
+      <form class="search-bar" id="searchForm" role="search">
+        <label class="visually-hidden" for="searchInput">Buscar vacantes</label>
+        <span class="search-icon" aria-hidden="true">⌕</span>
+        <input id="searchInput" name="q" type="search" autocomplete="off"
+          placeholder="Ej. React, NovaTech, Monterrey, remoto…">
+        <button class="button button-primary" type="submit">Buscar</button>
+      </form>
+
+      <div class="filters" role="group" aria-label="Filtros">
+        <label>
+          <span>Modalidad</span>
+          <select id="filterMode">
+            <option value="">Todas</option>
+            <option value="Remoto">Remoto</option>
+            <option value="Híbrido">Híbrido</option>
+            <option value="Presencial">Presencial</option>
+          </select>
+        </label>
+
+        <label>
+          <span>Nivel</span>
+          <select id="filterLevel">
+            <option value="">Todos</option>
+            <option value="Practicante">Practicante</option>
+            <option value="Junior">Junior</option>
+            <option value="Semi Senior">Semi Senior</option>
+            <option value="Senior">Senior</option>
+          </select>
+        </label>
+
+        <button class="button button-ghost" id="clearFilters" type="button">Limpiar filtros</button>
+      </div>
+    </section>
+
+    <section class="jobs-results container" aria-labelledby="resultsCount">
+      <p class="results-count" id="resultsCount" aria-live="polite"></p>
+      <ul class="jobs-grid" id="jobsList"></ul>
+
+      <div class="empty-state" id="emptyState" hidden>
+        <h2>No encontramos vacantes con esa búsqueda</h2>
+        <p>Prueba con menos palabras o quita algún filtro.</p>
+        <button class="button button-secondary" id="emptyReset" type="button">Ver todas las vacantes</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <a class="brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true">M</span>
+        <span>matchwork<span class="brand-dot">.</span></span>
+      </a>
+      <p>Un proyecto académico en construcción · Desarrollo Web Profesional</p>
+    </div>
+  </footer>
+
+</body>
+</html>

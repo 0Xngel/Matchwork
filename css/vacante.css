@@ -1,0 +1,163 @@
+/* Detalle de vacante: usa las variables definidas en styles.css */
+
+.vac-main {
+  max-width: 820px;
+  padding-block: 48px 90px;
+}
+
+.vac-back {
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.vac-back:hover {
+  color: var(--color-primary);
+}
+
+.vac-card {
+  margin-top: 18px;
+  padding: 34px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-soft);
+}
+
+.vac-card[hidden],
+.vac-missing[hidden] {
+  display: none;
+}
+
+.vac-top {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 22px;
+}
+
+.vac-top .company-logo {
+  width: 64px;
+  height: 64px;
+  font-size: 30px;
+}
+
+.vac-top .company-name {
+  margin: 0;
+}
+
+.vac-top h1 {
+  margin: 2px 0 0;
+  font-size: clamp(26px, 4vw, 34px);
+  letter-spacing: -1.2px;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+
+.vac-top .job-location {
+  margin: 4px 0 0;
+}
+
+.vac-card .job-tags {
+  margin-bottom: 24px;
+}
+
+.company-coral {
+  background: #ffe0dd;
+  color: #c3444b;
+}
+
+.vac-facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 16px;
+  margin: 0 0 28px;
+  padding: 18px 20px;
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-secondary);
+}
+
+.vac-facts dt {
+  color: var(--color-text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.vac-facts dd {
+  margin: 2px 0 0;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.vac-card h2 {
+  margin: 0 0 10px;
+  font-size: 19px;
+  letter-spacing: -0.5px;
+}
+
+.vac-description {
+  margin: 0 0 30px;
+  color: var(--color-text-secondary);
+  font-size: 15px;
+  line-height: 1.85;
+  overflow-wrap: anywhere;
+  white-space: pre-line;
+}
+
+.vac-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+}
+
+.vac-actions .button:disabled {
+  cursor: default;
+  opacity: 0.65;
+  transform: none;
+}
+
+.vac-message {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: 14px;
+}
+
+.vac-message a {
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.vac-message a:hover {
+  text-decoration: underline;
+}
+
+.vac-missing {
+  max-width: 480px;
+  margin: 60px auto 0;
+  text-align: center;
+}
+
+.vac-missing h1 {
+  margin: 0 0 8px;
+  font-size: 26px;
+}
+
+.vac-missing p {
+  margin: 0 0 20px;
+  color: var(--color-text-secondary);
+}
+
+@media (max-width: 560px) {
+  .vac-main {
+    padding-block: 32px 60px;
+  }
+
+  .vac-card {
+    padding: 22px;
+  }
+
+  .vac-top {
+    align-items: flex-start;
+  }
+}
