@@ -1,0 +1,380 @@
+/* =========================================
+   MATCHWORK — DASHBOARD DE EMPLEOS
+   ========================================= */
+
+/* 1. Contenedor principal */
+
+.dashboard-main {
+  min-height: 70vh;
+  padding-block: 56px 88px;
+}
+
+/* 2. Navegación del dashboard */
+
+.dashboard-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.dashboard-nav-link {
+  padding: 10px 14px;
+  border-radius: var(--radius-pill);
+  color: var(--color-text-secondary);
+  font-size: 14px;
+  font-weight: 650;
+  transition:
+    color var(--transition-fast),
+    background-color var(--transition-fast);
+}
+
+.dashboard-nav-link:hover,
+.dashboard-nav-link.active {
+  background: var(--color-text);
+  color: var(--color-background);
+}
+
+.dashboard-nav-link:focus-visible {
+  outline: 2px solid var(--color-text);
+  outline-offset: 3px;
+}
+
+.dashboard-home-link {
+  white-space: nowrap;
+}
+
+/* 3. Bienvenida */
+
+.dashboard-welcome {
+  max-width: 760px;
+  margin-bottom: 38px;
+}
+
+.dashboard-welcome h1 {
+  margin: 14px 0;
+  font-size: clamp(36px, 5vw, 58px);
+  font-weight: 850;
+  letter-spacing: -2.8px;
+  line-height: 1.12;
+}
+
+.dashboard-welcome > p {
+  max-width: 620px;
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+/* 4. Buscador */
+
+.job-search-section {
+  margin-bottom: 54px;
+  padding: 28px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-soft);
+}
+
+.job-search-section h2 {
+  margin: 0 0 22px;
+  font-size: 20px;
+  letter-spacing: -0.5px;
+}
+
+.job-search-form {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 16px;
+}
+
+.search-field {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.search-field label,
+.sort-field,
+.job-filters label {
+  color: var(--color-text-secondary);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.search-field input,
+.job-filters select,
+.sort-field select {
+  width: 100%;
+  min-width: 0;
+  min-height: 46px;
+  padding: 10px 13px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-background);
+  color: var(--color-text);
+}
+
+.search-field input::placeholder {
+  color: var(--color-text-secondary);
+  opacity: 0.8;
+}
+
+.search-field input:focus-visible,
+.job-filters select:focus-visible,
+.sort-field select:focus-visible {
+  border-color: var(--color-primary);
+  outline: 3px solid rgb(118 87 255 / 18%);
+  outline-offset: 1px;
+}
+
+.job-search-form .button {
+  min-height: 46px;
+  white-space: nowrap;
+}
+
+/* 5. Encabezado de las oportunidades */
+
+.jobs-section {
+  min-width: 0;
+}
+
+.jobs-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.jobs-heading h2 {
+  margin: 8px 0 0;
+  font-size: clamp(26px, 3vw, 34px);
+  letter-spacing: -1px;
+  line-height: 1.2;
+}
+
+.sort-field {
+  display: flex;
+  width: 190px;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sort-field select,
+.job-filters select {
+  cursor: pointer;
+}
+
+/* 6. Filtros */
+
+.job-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.job-filters select {
+  width: auto;
+  min-width: 175px;
+  min-height: 40px;
+  padding-block: 7px;
+  font-size: 12px;
+}
+
+/* 7. Resultados */
+
+.jobs-results {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.jobs-placeholder {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 40px 24px;
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text-secondary);
+  text-align: center;
+}
+
+/* 8. Adaptación a tabletas */
+
+@media (max-width: 900px) {
+  .job-search-form {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .job-search-form .button {
+    grid-column: 1 / -1;
+  }
+
+  .jobs-results {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 9. Adaptación a móviles */
+
+@media (max-width: 760px) {
+  .dashboard-main {
+    padding-block: 40px 60px;
+  }
+
+  .dashboard-nav-links {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    padding-top: 4px;
+  }
+
+  .dashboard-nav-link {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+
+  .dashboard-home-link {
+    display: none;
+  }
+
+  .dashboard-welcome {
+    margin-bottom: 28px;
+  }
+
+  .dashboard-welcome h1 {
+    font-size: clamp(34px, 9vw, 48px);
+    letter-spacing: -1.8px;
+  }
+
+  .dashboard-welcome > p {
+    font-size: 14px;
+  }
+
+  .job-search-section {
+    margin-bottom: 42px;
+    padding: 20px;
+    border-radius: var(--radius-md);
+  }
+
+  .job-search-form {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .job-search-form .button {
+    grid-column: auto;
+    width: 100%;
+  }
+
+  .jobs-heading {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .sort-field {
+    width: 100%;
+  }
+
+  .job-filters {
+    align-items: stretch;
+  }
+
+  .job-filters label {
+    align-self: center;
+  }
+
+  .job-filters select {
+    flex: 1 1 160px;
+    min-width: 0;
+  }
+}
+
+/* 10. Pantallas muy pequeñas */
+
+@media (max-width: 380px) {
+  .dashboard-welcome h1 {
+    font-size: 32px;
+  }
+
+  .job-search-section {
+    padding: 16px;
+  }
+
+  .job-filters {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .job-filters select {
+    width: 100%;
+  }
+}
+
+
+/* Tarjetas de vacantes */
+.dashboard-job-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 22px;
+}
+
+.dashboard-job-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.dashboard-job-type {
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: var(--surface-secondary);
+  color: var(--text-secondary);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.dashboard-job-card h3 {
+  margin: 0;
+  line-height: 1.4;
+}
+
+.dashboard-job-card .company-name,
+.dashboard-job-card .job-location {
+  margin: 0;
+}
+
+.dashboard-job-card .job-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.dashboard-job-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+
+.dashboard-job-footer strong {
+  font-size: 0.95rem;
+}
+
+.dashboard-job-footer span {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}

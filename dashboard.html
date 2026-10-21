@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f7f7fc">
+  <meta name="description" content="Explora oportunidades laborales y encuentra tu próximo match profesional con Matchwork.">
+
+  <title>Explorar empleos — Matchwork</title>
+
+  <script>
+    (() => {
+      try {
+        const savedTheme = localStorage.getItem('matchwork-theme');
+        const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        document.documentElement.dataset.theme =
+          savedTheme === 'dark' || savedTheme === 'light'
+            ? savedTheme
+            : (systemDark ? 'dark' : 'light');
+      } catch {
+        document.documentElement.dataset.theme = 'light';
+      }
+    })();
+  </script>
+
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+
+  <script src="js/theme.js" defer></script>
+  <script src="js/dashboard.js" defer></script>
+</head>
+
+<body class="dashboard-page">
+
+  <header class="site-header">
+    <nav class="navbar container" aria-label="Navegación principal">
+
+      <a class="brand" href="index.html" aria-label="Matchwork, página principal">
+        <span class="brand-mark" aria-hidden="true">M</span>
+        <span>matchwork<span class="brand-dot">.</span></span>
+      </a>
+
+      <div class="dashboard-nav-links">
+        <a class="dashboard-nav-link active" href="dashboard.html" aria-current="page">
+          Explorar empleos
+        </a>
+        <a class="dashboard-nav-link" href="profile.html">
+          Mi perfil
+        </a>
+      </div>
+
+      <div class="nav-actions">
+        <button
+          class="theme-toggle"
+          id="themeToggle"
+          type="button"
+          aria-label="Cambiar tema"
+          title="Cambiar tema"
+        >
+          <span id="themeIcon" aria-hidden="true">☾</span>
+        </button>
+
+        <a class="button button-ghost dashboard-home-link" href="index.html">
+          Inicio
+        </a>
+      </div>
+
+    </nav>
+  </header>
+
+  <main class="dashboard-main container">
+
+    <section class="dashboard-welcome" aria-labelledby="dashboard-title">
+      <span class="eyebrow">TU SIGUIENTE CAPÍTULO</span>
+
+      <h1 id="dashboard-title">
+        Encuentra tu próximo <span class="highlight">match.</span>
+      </h1>
+
+      <p>
+        Explora oportunidades, descubre nuevas empresas y encuentra un puesto
+        que encaje contigo.
+      </p>
+    </section>
+
+    <section class="job-search-section" aria-labelledby="job-search-title">
+      <h2 id="job-search-title">¿Qué oportunidad estás buscando?</h2>
+
+      <form class="job-search-form" id="jobSearchForm">
+        <div class="search-field">
+          <label for="jobSearch">Puesto, habilidad o empresa</label>
+          <input
+            id="jobSearch"
+            name="q"
+            type="search"
+            placeholder="Ej. Desarrollador web"
+          >
+        </div>
+
+        <div class="search-field">
+          <label for="jobLocation">Ubicación</label>
+          <input
+            id="jobLocation"
+            name="location"
+            type="search"
+            placeholder="Ej. Monterrey o remoto"
+          >
+        </div>
+
+        <button class="button button-primary" type="submit">
+          Buscar empleos
+        </button>
+      </form>
+    </section>
+
+    <section class="jobs-section" aria-labelledby="jobs-title">
+      <div class="jobs-heading">
+        <div>
+          <span class="eyebrow">OPORTUNIDADES PARA TI</span>
+          <h2 id="jobs-title">Explora vacantes</h2>
+        </div>
+
+        <label class="sort-field" for="jobSort">
+          Ordenar por
+          <select id="jobSort" name="sort">
+            <option value="recent">Más recientes</option>
+            <option value="title">Nombre del puesto</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="job-filters" aria-label="Filtros de empleo">
+        <label for="jobType">Tipo de empleo</label>
+        <select id="jobType" name="type">
+          <option value="all">Todos los tipos</option>
+          <option value="full-time">Tiempo completo</option>
+          <option value="part-time">Medio tiempo</option>
+          <option value="internship">Prácticas</option>
+        </select>
+
+        <label for="jobModality">Modalidad</label>
+        <select id="jobModality" name="modality">
+          <option value="all">Todas las modalidades</option>
+          <option value="remote">Remoto</option>
+          <option value="hybrid">Híbrido</option>
+          <option value="onsite">Presencial</option>
+        </select>
+      </div>
+
+<p id="jobsCount" class="jobs-count">Cargando oportunidades...</p>
+
+      <div class="jobs-results" id="jobsResults" aria-live="polite">
+        <p class="jobs-placeholder">
+          Las oportunidades de ejemplo aparecerán aquí.
+        </p>
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <a class="brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true">M</span>
+        <span>matchwork<span class="brand-dot">.</span></span>
+      </a>
+
+      <p>Un proyecto académico en construcción · Desarrollo Web Profesional</p>
+    </div>
+  </footer>
+
+</body>
+</html>
